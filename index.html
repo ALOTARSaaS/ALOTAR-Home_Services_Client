@@ -1,82 +1,74 @@
 <!doctype html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="#090a0d">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <title>ALOTAR Home Services</title>
-  <link rel="manifest" href="./manifest.json">
-  <style>
-    :root{--bg:#090a0d;--panel:#111318;--panel2:#171a20;--text:#f7f4eb;--muted:#aaa69b;--gold:#d9b35f;--gold2:#f2d98d;--line:#2b2d33;--danger:#ff7b7b}
-    *{box-sizing:border-box} body{margin:0;background:radial-gradient(circle at 50% -10%,#2a2519 0,#111216 30%,var(--bg) 60%);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;min-height:100vh}
-    button,input,select{font:inherit}.app{max-width:720px;margin:auto;min-height:100vh;padding:env(safe-area-inset-top) 18px calc(88px + env(safe-area-inset-bottom))}
-    .top{display:flex;align-items:center;justify-content:space-between;padding:18px 0}.brand{font-weight:900;letter-spacing:.18em}.brand span{color:var(--gold2)}.lang{background:#16181d;border:1px solid var(--line);color:var(--text);border-radius:999px;padding:8px 12px}
-    .hero{padding:26px 0 18px}.eyebrow{color:var(--gold2);font-size:12px;font-weight:800;letter-spacing:.15em}.hero h1{font-size:34px;line-height:1.02;margin:9px 0 10px}.hero p{color:var(--muted);line-height:1.55;margin:0}
-    .card{background:linear-gradient(145deg,rgba(242,217,141,.10),rgba(255,255,255,.025) 28%,rgba(255,255,255,.015));border:1px solid rgba(217,179,95,.32);box-shadow:0 18px 50px rgba(0,0,0,.3),inset 0 1px rgba(255,255,255,.06);border-radius:22px;padding:18px;margin:14px 0}
-    label{display:block;color:var(--muted);font-size:13px;margin:12px 0 7px}.input{width:100%;background:#0d0f13;border:1px solid var(--line);color:var(--text);border-radius:14px;padding:15px;outline:none}.input:focus{border-color:var(--gold)}
-    .btn{width:100%;border:0;border-radius:14px;padding:15px;font-weight:850;margin-top:14px;cursor:pointer}.primary{background:linear-gradient(120deg,#a97b25,#f0d17a,#b88a31);color:#151006}.secondary{background:#1b1e24;color:var(--text);border:1px solid var(--line)}
-    .status{font-size:13px;min-height:20px;margin-top:10px;color:var(--muted)}.status.err{color:var(--danger)}
-    .hidden{display:none!important}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.provider{padding:15px;border-radius:18px;background:var(--panel2);border:1px solid var(--line)}.provider h3{margin:8px 0 4px;font-size:16px}.meta{font-size:12px;color:var(--muted)}.badge{display:inline-block;padding:5px 8px;border-radius:999px;background:rgba(217,179,95,.12);color:var(--gold2);font-size:11px;margin:6px 5px 0 0}
-    .session{display:flex;justify-content:space-between;align-items:center;gap:10px}.session .btn{width:auto;margin:0;padding:10px 13px}.footer{color:#716e66;font-size:11px;text-align:center;margin-top:24px}
-    @media(max-width:420px){.hero h1{font-size:30px}.grid{grid-template-columns:1fr}}
-  </style>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#090a0d"><meta name="apple-mobile-web-app-capable" content="yes">
+<title>ALOTAR Home Services</title><link rel="manifest" href="./manifest.json">
+<style>
+:root{--bg:#090a0d;--card:#121419;--card2:#181b21;--text:#faf7ef;--muted:#aaa69b;--gold:#d8ad4f;--gold2:#f3d884;--line:#292c33;--bad:#ff8181}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 50% -10%,#2c2619 0,#111216 30%,var(--bg) 62%);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;min-height:100vh}
+button,input{font:inherit}.app{max-width:720px;margin:auto;padding:env(safe-area-inset-top) 17px calc(92px + env(safe-area-inset-bottom));min-height:100vh}
+.top{height:64px;display:flex;align-items:center;justify-content:space-between}.brand{font-weight:950;letter-spacing:.17em}.brand b{color:var(--gold2)}.pill{border:1px solid var(--line);background:#15171c;color:var(--text);border-radius:999px;padding:9px 12px}
+.hero{padding:24px 0 12px}.eyebrow{font-size:11px;letter-spacing:.16em;color:var(--gold2);font-weight:900}.hero h1{font-size:34px;line-height:1.04;margin:8px 0 10px}.hero p,.muted{color:var(--muted)}
+.card{border:1px solid rgba(216,173,79,.34);background:linear-gradient(145deg,rgba(243,216,132,.08),rgba(255,255,255,.018) 35%);border-radius:22px;padding:17px;margin:14px 0;box-shadow:0 18px 45px #0006}
+.input{width:100%;padding:15px;border-radius:15px;background:#0e1014;border:1px solid var(--line);color:var(--text);outline:none}.input:focus{border-color:var(--gold)}
+label{display:block;color:var(--muted);font-size:13px;margin:10px 0 7px}.btn{width:100%;border:0;border-radius:15px;padding:15px;font-weight:900;margin-top:13px;cursor:pointer}.primary{background:linear-gradient(115deg,#a77720,#f1d275,#bd8b2d);color:#181106}.secondary{background:#1a1d23;color:var(--text);border:1px solid var(--line)}
+.status{min-height:19px;margin-top:10px;font-size:13px;color:var(--muted)}.bad{color:var(--bad)}.hidden{display:none!important}
+.homehead{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:16px 0 8px}.homehead h2{margin:3px 0;font-size:24px}.homehead button{width:auto;margin:0;padding:10px 13px}
+.search{position:relative;margin:14px 0}.search input{padding-left:44px}.search:before{content:"⌕";position:absolute;left:16px;top:11px;font-size:25px;color:var(--gold2)}
+.section{margin-top:25px}.sectiontitle{display:flex;align-items:end;justify-content:space-between;margin-bottom:12px}.sectiontitle h3{margin:0;font-size:18px}.sectiontitle span{font-size:12px;color:var(--muted)}
+.categories{display:grid;grid-template-columns:repeat(2,1fr);gap:11px}.cat{min-height:112px;text-align:left;border:1px solid var(--line);background:linear-gradient(145deg,#1b1d22,#111318);border-radius:20px;padding:15px;color:var(--text);cursor:pointer}.cat .ico{font-size:28px}.cat strong{display:block;margin-top:13px}.cat small{display:block;color:var(--muted);margin-top:4px}.cat.active{border-color:var(--gold);box-shadow:inset 0 0 0 1px #d8ad4f55}
+.notice{border:1px dashed #49443a;background:#111216;border-radius:18px;padding:16px;color:var(--muted);line-height:1.45;font-size:13px}
+.nav{position:fixed;left:50%;bottom:0;transform:translateX(-50%);width:min(720px,100%);padding:9px 18px calc(9px + env(safe-area-inset-bottom));background:#0b0c0fee;border-top:1px solid var(--line);backdrop-filter:blur(14px);display:flex;justify-content:space-around}
+.nav button{background:none;border:0;color:#77746d;font-size:11px}.nav button b{display:block;font-size:20px;margin-bottom:3px}.nav .on{color:var(--gold2)}
+.footer{text-align:center;color:#6e6a62;font-size:10px;margin:28px 0}
+@media(max-width:420px){.hero h1{font-size:30px}}
+</style>
 </head>
-<body>
-<main class="app">
-  <header class="top"><div class="brand">ALOTAR <span>HOME</span></div><button id="langBtn" class="lang">EN</button></header>
+<body><main class="app">
+<header class="top"><div class="brand">ALOTAR <b>HOME</b></div><button id="langBtn" class="pill">EN</button></header>
 
-  <section id="loginView">
-    <div class="hero"><div class="eyebrow" data-i18n="eyebrow">SERVICIOS A DOMICILIO</div><h1 data-i18n="title">Encuentra ayuda confiable, donde la necesites.</h1><p data-i18n="subtitle">Ingresa con tu correo y un código seguro. Sin contraseñas.</p></div>
-    <div class="card">
-      <div id="emailStep">
-        <label data-i18n="email">Correo electrónico</label><input id="email" class="input" type="email" autocomplete="email" placeholder="tu@correo.com">
-        <button id="requestBtn" class="btn primary" data-i18n="sendOtp">Enviar código</button>
-      </div>
-      <div id="otpStep" class="hidden">
-        <label data-i18n="otp">Código de 6 dígitos</label><input id="otp" class="input" inputmode="numeric" maxlength="6" autocomplete="one-time-code" placeholder="000000">
-        <button id="verifyBtn" class="btn primary" data-i18n="verify">Ingresar</button><button id="backBtn" class="btn secondary" data-i18n="changeEmail">Cambiar correo</button>
-      </div>
-      <div id="authStatus" class="status"></div>
-    </div>
-  </section>
+<section id="loginView">
+<div class="hero"><div class="eyebrow" data-t="eyebrow">SERVICIOS A DOMICILIO</div><h1 data-t="title">Lo que necesitas, llega hasta ti.</h1><p data-t="subtitle">Ingresa con tu correo y un código seguro. Sin contraseñas.</p></div>
+<div class="card">
+<div id="emailStep"><label data-t="email">Correo electrónico</label><input id="email" class="input" type="email" autocomplete="email" placeholder="tu@correo.com"><button id="requestBtn" class="btn primary" data-t="send">Enviar código</button></div>
+<div id="otpStep" class="hidden"><label data-t="otp">Código de 6 dígitos</label><input id="otp" class="input" inputmode="numeric" maxlength="6" autocomplete="one-time-code" placeholder="000000"><button id="verifyBtn" class="btn primary" data-t="enter">Ingresar</button><button id="backBtn" class="btn secondary" data-t="change">Cambiar correo</button></div>
+<div id="authStatus" class="status"></div>
+</div></section>
 
-  <section id="homeView" class="hidden">
-    <div class="session"><div><div class="eyebrow">ALOTAR HOME</div><strong data-i18n="welcome">Hola, ¿qué necesitas hoy?</strong></div><button id="logoutBtn" class="btn secondary" data-i18n="logout">Salir</button></div>
-    <div class="card">
-      <label data-i18n="account">Empresa / cuenta</label><input id="accountId" class="input" placeholder="HSA_...">
-      <label data-i18n="mode">Buscar por</label>
-      <select id="mode" class="input"><option value="CANONICAL_TAXONOMY" data-i18n="category">Categoría</option><option value="EXACT_HOME_SERVICE_ID" data-i18n="exact">Servicio exacto</option></select>
-      <label id="queryLabel" data-i18n="categoryKey">Clave de categoría</label><input id="queryValue" class="input" placeholder="LIMPIEZA">
-      <button id="discoverBtn" class="btn primary" data-i18n="search">Buscar prestadores</button><div id="discoverStatus" class="status"></div>
-    </div>
-    <div id="results" class="grid"></div>
-  </section>
-  <div class="footer">ALOTAR · Home Services PWA V1</div>
+<section id="homeView" class="hidden">
+<div class="homehead"><div><div class="eyebrow">ALOTAR HOME</div><h2 data-t="hello">¿Qué servicio necesitas?</h2></div><button id="logoutBtn" class="btn secondary" data-t="exit">Salir</button></div>
+<div class="search"><input id="serviceSearch" class="input" data-ph="search" placeholder="Buscar un servicio..."></div>
+<div class="section"><div class="sectiontitle"><h3 data-t="services">Servicios</h3><span data-t="choose">Elige una categoría</span></div>
+<div id="categories" class="categories">
+<button class="cat" data-key="CLEANING"><span class="ico">🧹</span><strong data-t="clean">Limpieza</strong><small data-t="cleanSub">Hogar y espacios</small></button>
+<button class="cat" data-key="PLUMBING"><span class="ico">🔧</span><strong data-t="plumb">Plomería</strong><small data-t="plumbSub">Reparaciones e instalaciones</small></button>
+<button class="cat" data-key="ELECTRICAL"><span class="ico">⚡</span><strong data-t="electric">Electricidad</strong><small data-t="electricSub">Instalaciones y reparación</small></button>
+<button class="cat" data-key="PAINTING"><span class="ico">🎨</span><strong data-t="paint">Pintura</strong><small data-t="paintSub">Interiores y exteriores</small></button>
+</div></div>
+<div class="section"><div class="sectiontitle"><h3 data-t="providers">Prestadores</h3><span data-t="near">Disponibles para ti</span></div>
+<div id="providerArea" class="notice" data-t="safeNotice">Selecciona un servicio. La siguiente conexión usará un catálogo público seguro para resolver internamente la empresa, el servicio y los prestadores; los IDs técnicos no se mostrarán al cliente.</div>
+</div>
+<div class="footer">ALOTAR · Home Services Client PWA V2</div>
+<nav class="nav"><button class="on"><b>⌂</b><span data-t="home">Inicio</span></button><button><b>⌕</b><span data-t="activity">Actividad</span></button><button><b>♡</b><span data-t="favorites">Favoritos</span></button><button><b>○</b><span data-t="profile">Perfil</span></button></nav>
+</section>
 </main>
 <script>
 const API='https://script.google.com/macros/s/AKfycbxhpU7b6Kaw04Ces-YuvILmOeQ3RsLSYkap8fBKoRJyVjFSZl4rfEOugcARguv9_M9_aQ/exec';
-const K={token:'alotar.hs.session',account:'alotar.hs.account',lang:'alotar.hs.lang'};
-let challengeId='', lang=localStorage.getItem(K.lang)||'es';
-const $=id=>document.getElementById(id);
-const T={es:{eyebrow:'SERVICIOS A DOMICILIO',title:'Encuentra ayuda confiable, donde la necesites.',subtitle:'Ingresa con tu correo y un código seguro. Sin contraseñas.',email:'Correo electrónico',sendOtp:'Enviar código',otp:'Código de 6 dígitos',verify:'Ingresar',changeEmail:'Cambiar correo',welcome:'Hola, ¿qué necesitas hoy?',logout:'Salir',account:'Empresa / cuenta',mode:'Buscar por',category:'Categoría',exact:'Servicio exacto',categoryKey:'Clave de categoría',serviceId:'ID del servicio',search:'Buscar prestadores',sending:'Enviando código…',sent:'Revisa tu correo.',authing:'Verificando…',bad:'No fue posible completar la solicitud.',searching:'Buscando…',none:'No encontramos prestadores para esta búsqueda.',sessionExpired:'Tu sesión terminó. Ingresa nuevamente.'},en:{eyebrow:'HOME SERVICES',title:'Trusted help, wherever you need it.',subtitle:'Sign in with your email and a secure code. No passwords.',email:'Email',sendOtp:'Send code',otp:'6-digit code',verify:'Sign in',changeEmail:'Change email',welcome:'Hi, what do you need today?',logout:'Sign out',account:'Company / account',mode:'Search by',category:'Category',exact:'Exact service',categoryKey:'Category key',serviceId:'Service ID',search:'Find providers',sending:'Sending code…',sent:'Check your email.',authing:'Verifying…',bad:'We could not complete the request.',searching:'Searching…',none:'No providers found for this search.',sessionExpired:'Your session ended. Please sign in again.'}};
-function tr(k){return T[lang][k]||k} function paint(){document.documentElement.lang=lang;document.querySelectorAll('[data-i18n]').forEach(x=>x.textContent=tr(x.dataset.i18n));$('langBtn').textContent=lang==='es'?'EN':'ES';syncMode()}
-function status(id,msg,err=false){$(id).textContent=msg;$(id).className='status'+(err?' err':'')}
-async function post(body){const r=await fetch(API,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(body),redirect:'follow'});const txt=await r.text();let j;try{j=JSON.parse(txt)}catch(e){throw new Error('NON_JSON_RESPONSE')}return j}
-function showHome(){const on=!!localStorage.getItem(K.token);$('loginView').classList.toggle('hidden',on);$('homeView').classList.toggle('hidden',!on);$('accountId').value=localStorage.getItem(K.account)||''}
-function clearLocal(){localStorage.removeItem(K.token);challengeId='';showHome()}
+const K={token:'alotar.hs.session',lang:'alotar.hs.lang'};let challengeId='',lang=localStorage.getItem(K.lang)||'es';const $=x=>document.getElementById(x);
+const D={es:{eyebrow:'SERVICIOS A DOMICILIO',title:'Lo que necesitas, llega hasta ti.',subtitle:'Ingresa con tu correo y un código seguro. Sin contraseñas.',email:'Correo electrónico',send:'Enviar código',otp:'Código de 6 dígitos',enter:'Ingresar',change:'Cambiar correo',hello:'¿Qué servicio necesitas?',exit:'Salir',search:'Buscar un servicio...',services:'Servicios',choose:'Elige una categoría',clean:'Limpieza',cleanSub:'Hogar y espacios',plumb:'Plomería',plumbSub:'Reparaciones e instalaciones',electric:'Electricidad',electricSub:'Instalaciones y reparación',paint:'Pintura',paintSub:'Interiores y exteriores',providers:'Prestadores',near:'Disponibles para ti',safeNotice:'Selecciona un servicio. La siguiente conexión usará un catálogo público seguro para resolver internamente la empresa, el servicio y los prestadores; los IDs técnicos no se mostrarán al cliente.',home:'Inicio',activity:'Actividad',favorites:'Favoritos',profile:'Perfil',sending:'Enviando código…',sent:'Revisa tu correo.',checking:'Verificando…',error:'No fue posible completar la solicitud.'},
+en:{eyebrow:'HOME SERVICES',title:'What you need, delivered to you.',subtitle:'Sign in with your email and a secure code. No passwords.',email:'Email',send:'Send code',otp:'6-digit code',enter:'Sign in',change:'Change email',hello:'What service do you need?',exit:'Sign out',search:'Search for a service...',services:'Services',choose:'Choose a category',clean:'Cleaning',cleanSub:'Home and spaces',plumb:'Plumbing',plumbSub:'Repairs and installations',electric:'Electrical',electricSub:'Installation and repair',paint:'Painting',paintSub:'Interior and exterior',providers:'Providers',near:'Available for you',safeNotice:'Choose a service. The next connection will use a safe public catalog to resolve company, service and providers internally; technical IDs will not be shown to the customer.',home:'Home',activity:'Activity',favorites:'Favorites',profile:'Profile',sending:'Sending code…',sent:'Check your email.',checking:'Verifying…',error:'We could not complete the request.'}};
+const tr=k=>D[lang][k]||k;
+function paint(){document.documentElement.lang=lang;document.querySelectorAll('[data-t]').forEach(e=>e.textContent=tr(e.dataset.t));document.querySelectorAll('[data-ph]').forEach(e=>e.placeholder=tr(e.dataset.ph));$('langBtn').textContent=lang==='es'?'EN':'ES'}
+function status(s,bad=false){$('authStatus').textContent=s;$('authStatus').className='status'+(bad?' bad':'')}
+async function post(body){const r=await fetch(API,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(body),redirect:'follow'});const txt=await r.text();try{return JSON.parse(txt)}catch(e){throw new Error('NON_JSON')}}
+function show(){const ok=!!localStorage.getItem(K.token);$('loginView').classList.toggle('hidden',ok);$('homeView').classList.toggle('hidden',!ok)}
 $('langBtn').onclick=()=>{lang=lang==='es'?'en':'es';localStorage.setItem(K.lang,lang);paint()}
-$('requestBtn').onclick=async()=>{const email=$('email').value.trim();if(!email)return status('authStatus',tr('bad'),true);status('authStatus',tr('sending'));try{const r=await post({action:'requestAuthenticationOtp',payload:{email}});challengeId=String(r?.data?.challenge_id||'');if(!r.ok||!challengeId)throw 0;$('emailStep').classList.add('hidden');$('otpStep').classList.remove('hidden');status('authStatus',tr('sent'))}catch(e){status('authStatus',tr('bad'),true)}}
-$('backBtn').onclick=()=>{challengeId='';$('otpStep').classList.add('hidden');$('emailStep').classList.remove('hidden');status('authStatus','')}
-$('verifyBtn').onclick=async()=>{const otp=$('otp').value.trim();if(!challengeId||!/^\d{6}$/.test(otp))return status('authStatus',tr('bad'),true);status('authStatus',tr('authing'));try{const r=await post({action:'verifyAuthenticationOtp',payload:{challenge_id:challengeId,otp}});const token=String(r?.data?.session_token||'');if(!r.ok||r?.data?.authenticated!==true||!token)throw 0;localStorage.setItem(K.token,token);$('otp').value='';status('authStatus','');showHome()}catch(e){status('authStatus',tr('bad'),true)}}
-function syncMode(){const exact=$('mode').value==='EXACT_HOME_SERVICE_ID';$('queryLabel').textContent=tr(exact?'serviceId':'categoryKey');$('queryValue').placeholder=exact?'HSSVC_...':'LIMPIEZA'}
-$('mode').onchange=syncMode;
-$('discoverBtn').onclick=async()=>{const token=localStorage.getItem(K.token)||'',account=$('accountId').value.trim(),v=$('queryValue').value.trim(),mode=$('mode').value;if(!token){clearLocal();return}if(!account||!v)return status('discoverStatus',tr('bad'),true);localStorage.setItem(K.account,account);status('discoverStatus',tr('searching'));$('results').innerHTML='';const payload=mode==='EXACT_HOME_SERVICE_ID'?{mode,home_service_id:v}:{mode,canonical_key:v};try{const r=await post({action:'providerDiscovery',session_token:token,home_account_id:account,payload});if(!r.ok){if(/SESSION|AUTHENTICATION/.test(String(r.error||''))){clearLocal();return status('authStatus',tr('sessionExpired'),true)}throw 0}const dto=r?.data?.data||r?.data||{};const providers=Array.isArray(dto.providers)?dto.providers:[];status('discoverStatus',providers.length?'':tr('none'));$('results').innerHTML=providers.map(p=>`<article class="provider"><div class="eyebrow">${esc(p.rating||'—')} ★</div><h3>${esc(p.public_name||'Prestador')}</h3><div class="meta">${esc(p.completed_services||0)} servicios · ${esc(p.rating_count||0)} valoraciones</div>${(p.verification_badges||[]).map(b=>`<span class="badge">${esc(b)}</span>`).join('')}</article>`).join('')}catch(e){status('discoverStatus',tr('bad'),true)}}
-$('logoutBtn').onclick=async()=>{const token=localStorage.getItem(K.token)||'';clearLocal();try{if(token)await post({action:'logout',session_token:token,payload:{}})}catch(e){}}
-function esc(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-paint();showHome();
-if('serviceWorker'in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
-</script>
-</body>
-</html>
+$('requestBtn').onclick=async()=>{const email=$('email').value.trim();if(!email)return status(tr('error'),true);status(tr('sending'));try{const r=await post({action:'requestAuthenticationOtp',payload:{email}});challengeId=String(r?.data?.challenge_id||'');if(!r.ok||!challengeId)throw 0;$('emailStep').classList.add('hidden');$('otpStep').classList.remove('hidden');status(tr('sent'))}catch(e){status(tr('error'),true)}}
+$('backBtn').onclick=()=>{challengeId='';$('otpStep').classList.add('hidden');$('emailStep').classList.remove('hidden');status('')}
+$('verifyBtn').onclick=async()=>{const otp=$('otp').value.trim();if(!challengeId||!/^\d{6}$/.test(otp))return status(tr('error'),true);status(tr('checking'));try{const r=await post({action:'verifyAuthenticationOtp',payload:{challenge_id:challengeId,otp}}),token=String(r?.data?.session_token||'');if(!r.ok||r?.data?.authenticated!==true||!token)throw 0;localStorage.setItem(K.token,token);$('otp').value='';status('');show()}catch(e){status(tr('error'),true)}}
+$('logoutBtn').onclick=async()=>{const token=localStorage.getItem(K.token)||'';localStorage.removeItem(K.token);challengeId='';show();try{if(token)await post({action:'logout',session_token:token,payload:{}})}catch(e){}}
+document.querySelectorAll('.cat').forEach(b=>b.onclick=()=>{document.querySelectorAll('.cat').forEach(x=>x.classList.remove('active'));b.classList.add('active')});
+$('serviceSearch').oninput=e=>{const q=e.target.value.toLowerCase();document.querySelectorAll('.cat').forEach(b=>b.style.display=b.textContent.toLowerCase().includes(q)?'block':'none')};
+paint();show();if('serviceWorker'in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+</script></body></html>

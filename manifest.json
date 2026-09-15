@@ -1,12 +1,1 @@
-{
-  "name": "ALOTAR Home Services",
-  "short_name": "ALOTAR Home",
-  "description": "Servicios a domicilio con ALOTAR",
-  "start_url": "./",
-  "scope": "./",
-  "display": "standalone",
-  "background_color": "#090a0d",
-  "theme_color": "#090a0d",
-  "lang": "es",
-  "orientation": "portrait-primary"
-}
+{"name":"ALOTAR Home Services · Cliente","short_name":"ALOTAR Home","description":"PWA Cliente de ALOTAR Home Services","start_url":"./","scope":"./","display":"standalone","background_color":"#090a0d","theme_color":"#090a0d","lang":"es","orientation":"portrait-primary"}
