@@ -19,6 +19,8 @@ label{display:block;color:var(--muted);font-size:13px;margin:10px 0 7px}.btn{wid
 .section{margin-top:25px}.sectiontitle{display:flex;align-items:end;justify-content:space-between;margin-bottom:12px}.sectiontitle h3{margin:0;font-size:18px}.sectiontitle span{font-size:12px;color:var(--muted)}
 .categories{display:grid;grid-template-columns:repeat(2,1fr);gap:11px}.cat{min-height:112px;text-align:left;border:1px solid var(--line);background:linear-gradient(145deg,#1b1d22,#111318);border-radius:20px;padding:15px;color:var(--text);cursor:pointer}.cat .ico{font-size:28px}.cat strong{display:block;margin-top:13px}.cat small{display:block;color:var(--muted);margin-top:4px}.cat.active{border-color:var(--gold);box-shadow:inset 0 0 0 1px #d8ad4f55}
 .notice{border:1px dashed #49443a;background:#111216;border-radius:18px;padding:16px;color:var(--muted);line-height:1.45;font-size:13px}
+.locationBox{margin:14px 0;padding:15px;border:1px solid var(--line);border-radius:19px;background:#101216}.locationActions{display:grid;grid-template-columns:1fr 1fr;gap:9px}.locationActions .btn{margin-top:0;padding:12px}.locationMeta{margin-top:10px;font-size:12px;color:var(--muted)}
+.providersGrid{display:grid;gap:11px}.providerCard{border:1px solid rgba(216,173,79,.30);background:linear-gradient(145deg,#1a1c21,#101216);border-radius:20px;padding:15px;box-shadow:0 12px 30px #0004}.providerTop{display:flex;gap:12px;align-items:center}.avatar{width:52px;height:52px;border-radius:50%;background:#24272d;border:1px solid #45413a;display:grid;place-items:center;overflow:hidden;font-weight:950;color:var(--gold2);flex:0 0 auto}.avatar img{width:100%;height:100%;object-fit:cover}.providerName{font-weight:900}.providerMeta{font-size:12px;color:var(--muted);margin-top:4px}.badges{display:flex;flex-wrap:wrap;gap:6px;margin-top:11px}.badge{font-size:11px;padding:6px 8px;border-radius:999px;border:1px solid #3b3e45;background:#17191e;color:#d9d5ca}.distance{color:var(--gold2);font-weight:800}.providerStatus{margin:10px 0;color:var(--muted);font-size:13px}
 .nav{position:fixed;left:50%;bottom:0;transform:translateX(-50%);width:min(720px,100%);padding:9px 18px calc(9px + env(safe-area-inset-bottom));background:#0b0c0fee;border-top:1px solid var(--line);backdrop-filter:blur(14px);display:flex;justify-content:space-around}
 .nav button{background:none;border:0;color:#77746d;font-size:11px}.nav button b{display:block;font-size:20px;margin-bottom:3px}.nav .on{color:var(--gold2)}
 .footer{text-align:center;color:#6e6a62;font-size:10px;margin:28px 0}
@@ -47,17 +49,33 @@ label{display:block;color:var(--muted);font-size:13px;margin:10px 0 7px}.btn{wid
 <button class="cat" data-key="PAINTING"><span class="ico">🎨</span><strong data-t="paint">Pintura</strong><small data-t="paintSub">Interiores y exteriores</small></button>
 </div></div>
 <div class="section"><div class="sectiontitle"><h3 data-t="providers">Prestadores</h3><span data-t="near">Disponibles para ti</span></div>
-<div id="providerArea" class="notice" data-t="safeNotice">Selecciona un servicio. La siguiente conexión usará un catálogo público seguro para resolver internamente la empresa, el servicio y los prestadores; los IDs técnicos no se mostrarán al cliente.</div>
+<div id="locationBox" class="locationBox hidden">
+  <div class="providerStatus" data-t="where">¿Dónde necesitas el servicio?</div>
+  <div class="locationActions">
+    <button id="currentLocationBtn" class="btn primary" data-t="useLocation">Usar mi ubicación</button>
+    <button id="otherLocationBtn" class="btn secondary" data-t="otherLocation">Otra ubicación</button>
+  </div>
+  <div id="manualLocation" class="hidden">
+    <label data-t="coordinates">Coordenadas del lugar del servicio</label>
+    <div class="locationActions">
+      <input id="serviceLat" class="input" inputmode="decimal" placeholder="Latitud">
+      <input id="serviceLng" class="input" inputmode="decimal" placeholder="Longitud">
+    </div>
+    <button id="searchProvidersBtn" class="btn primary" data-t="findProviders">Buscar prestadores</button>
+  </div>
+  <div id="locationMeta" class="locationMeta"></div>
 </div>
-<div class="footer">ALOTAR · Home Services Client PWA V2</div>
+<div id="providerArea" class="notice" data-t="safeNotice">Selecciona un servicio para buscar prestadores reales disponibles cerca del lugar donde necesitas el servicio.</div>
+</div>
+<div class="footer">ALOTAR · Home Services Client PWA V63</div>
 <nav class="nav"><button class="on"><b>⌂</b><span data-t="home">Inicio</span></button><button><b>⌕</b><span data-t="activity">Actividad</span></button><button><b>♡</b><span data-t="favorites">Favoritos</span></button><button><b>○</b><span data-t="profile">Perfil</span></button></nav>
 </section>
 </main>
 <script>
 const API='https://script.google.com/macros/s/AKfycbxhpU7b6Kaw04Ces-YuvILmOeQ3RsLSYkap8fBKoRJyVjFSZl4rfEOugcARguv9_M9_aQ/exec';
 const K={token:'alotar.hs.session',lang:'alotar.hs.lang'};let challengeId='',lang=localStorage.getItem(K.lang)||'es';const $=x=>document.getElementById(x);
-const D={es:{eyebrow:'SERVICIOS A DOMICILIO',title:'Lo que necesitas, llega hasta ti.',subtitle:'Ingresa con tu correo y un código seguro. Sin contraseñas.',email:'Correo electrónico',send:'Enviar código',otp:'Código de 6 dígitos',enter:'Ingresar',change:'Cambiar correo',hello:'¿Qué servicio necesitas?',exit:'Salir',search:'Buscar un servicio...',services:'Servicios',choose:'Elige una categoría',clean:'Limpieza',cleanSub:'Hogar y espacios',plumb:'Plomería',plumbSub:'Reparaciones e instalaciones',electric:'Electricidad',electricSub:'Instalaciones y reparación',paint:'Pintura',paintSub:'Interiores y exteriores',providers:'Prestadores',near:'Disponibles para ti',safeNotice:'Selecciona un servicio. La siguiente conexión usará un catálogo público seguro para resolver internamente la empresa, el servicio y los prestadores; los IDs técnicos no se mostrarán al cliente.',home:'Inicio',activity:'Actividad',favorites:'Favoritos',profile:'Perfil',sending:'Enviando código…',sent:'Revisa tu correo.',checking:'Verificando…',error:'No fue posible completar la solicitud.'},
-en:{eyebrow:'HOME SERVICES',title:'What you need, delivered to you.',subtitle:'Sign in with your email and a secure code. No passwords.',email:'Email',send:'Send code',otp:'6-digit code',enter:'Sign in',change:'Change email',hello:'What service do you need?',exit:'Sign out',search:'Search for a service...',services:'Services',choose:'Choose a category',clean:'Cleaning',cleanSub:'Home and spaces',plumb:'Plumbing',plumbSub:'Repairs and installations',electric:'Electrical',electricSub:'Installation and repair',paint:'Painting',paintSub:'Interior and exterior',providers:'Providers',near:'Available for you',safeNotice:'Choose a service. The next connection will use a safe public catalog to resolve company, service and providers internally; technical IDs will not be shown to the customer.',home:'Home',activity:'Activity',favorites:'Favorites',profile:'Profile',sending:'Sending code…',sent:'Check your email.',checking:'Verifying…',error:'We could not complete the request.'}};
+const D={es:{eyebrow:'SERVICIOS A DOMICILIO',title:'Lo que necesitas, llega hasta ti.',subtitle:'Ingresa con tu correo y un código seguro. Sin contraseñas.',email:'Correo electrónico',send:'Enviar código',otp:'Código de 6 dígitos',enter:'Ingresar',change:'Cambiar correo',hello:'¿Qué servicio necesitas?',exit:'Salir',search:'Buscar un servicio...',services:'Servicios',choose:'Elige una categoría',clean:'Limpieza',cleanSub:'Hogar y espacios',plumb:'Plomería',plumbSub:'Reparaciones e instalaciones',electric:'Electricidad',electricSub:'Instalaciones y reparación',paint:'Pintura',paintSub:'Interiores y exteriores',providers:'Prestadores',near:'Disponibles para ti',safeNotice:'Selecciona un servicio. La siguiente conexión usará un catálogo público seguro para resolver internamente la empresa, el servicio y los prestadores; los IDs técnicos no se mostrarán al cliente.',home:'Inicio',activity:'Actividad',favorites:'Favoritos',profile:'Perfil',sending:'Enviando código…',sent:'Revisa tu correo.',checking:'Verificando…',error:'No fue posible completar la solicitud.',where:'¿Dónde necesitas el servicio?',useLocation:'Usar mi ubicación',otherLocation:'Otra ubicación',coordinates:'Coordenadas del lugar del servicio',findProviders:'Buscar prestadores',locating:'Obteniendo ubicación…',searchingProviders:'Buscando prestadores disponibles…',locationDenied:'No fue posible obtener tu ubicación. Puedes indicar otra ubicación.',noProviders:'No encontramos prestadores disponibles para este servicio en esta ubicación.',providerError:'No fue posible consultar prestadores.',kmAway:'km de distancia'},
+en:{eyebrow:'HOME SERVICES',title:'What you need, delivered to you.',subtitle:'Sign in with your email and a secure code. No passwords.',email:'Email',send:'Send code',otp:'6-digit code',enter:'Sign in',change:'Change email',hello:'What service do you need?',exit:'Sign out',search:'Search for a service...',services:'Services',choose:'Choose a category',clean:'Cleaning',cleanSub:'Home and spaces',plumb:'Plumbing',plumbSub:'Repairs and installations',electric:'Electrical',electricSub:'Installation and repair',paint:'Painting',paintSub:'Interior and exterior',providers:'Providers',near:'Available for you',safeNotice:'Choose a service. The next connection will use a safe public catalog to resolve company, service and providers internally; technical IDs will not be shown to the customer.',home:'Home',activity:'Activity',favorites:'Favorites',profile:'Profile',sending:'Sending code…',sent:'Check your email.',checking:'Verifying…',error:'We could not complete the request.',where:'Where do you need the service?',useLocation:'Use my location',otherLocation:'Other location',coordinates:'Service location coordinates',findProviders:'Find providers',locating:'Getting location…',searchingProviders:'Finding available providers…',locationDenied:'We could not get your location. You can enter another location.',noProviders:'No available providers were found for this service at this location.',providerError:'We could not load providers.',kmAway:'km away'}};
 const tr=k=>D[lang][k]||k;
 function paint(){document.documentElement.lang=lang;document.querySelectorAll('[data-t]').forEach(e=>e.textContent=tr(e.dataset.t));document.querySelectorAll('[data-ph]').forEach(e=>e.placeholder=tr(e.dataset.ph));$('langBtn').textContent=lang==='es'?'EN':'ES'}
 function status(s,bad=false){$('authStatus').textContent=s;$('authStatus').className='status'+(bad?' bad':'')}
@@ -68,7 +86,72 @@ $('requestBtn').onclick=async()=>{const email=$('email').value.trim();if(!email)
 $('backBtn').onclick=()=>{challengeId='';$('otpStep').classList.add('hidden');$('emailStep').classList.remove('hidden');status('')}
 $('verifyBtn').onclick=async()=>{const otp=$('otp').value.trim();if(!challengeId||!/^\d{6}$/.test(otp))return status(tr('error'),true);status(tr('checking'));try{const r=await post({action:'verifyAuthenticationOtp',payload:{challenge_id:challengeId,otp}}),token=String(r?.data?.session_token||'');if(!r.ok||r?.data?.authenticated!==true||!token)throw 0;localStorage.setItem(K.token,token);$('otp').value='';status('');show()}catch(e){status(tr('error'),true)}}
 $('logoutBtn').onclick=async()=>{const token=localStorage.getItem(K.token)||'';localStorage.removeItem(K.token);challengeId='';show();try{if(token)await post({action:'logout',session_token:token,payload:{}})}catch(e){}}
-document.querySelectorAll('.cat').forEach(b=>b.onclick=()=>{document.querySelectorAll('.cat').forEach(x=>x.classList.remove('active'));b.classList.add('active')});
+
+let selectedService='';
+function esc(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function providerNotice(text,bad=false){$('providerArea').className='notice'+(bad?' bad':'');$('providerArea').textContent=text}
+function initials(name){return String(name||'?').trim().split(/\s+/).slice(0,2).map(x=>x[0]||'').join('').toUpperCase()||'?'}
+function renderProviders(data){
+  const providers=Array.isArray(data?.providers)?data.providers:[];
+  if(!providers.length)return providerNotice(tr('noProviders'));
+  $('providerArea').className='providersGrid';
+  $('providerArea').innerHTML=providers.map(p=>{
+    const name=esc(p.public_name||'Prestador');
+    const photo=String(p.photo_url||'').trim();
+    const avatar=photo?`<img src="${esc(photo)}" alt="">`:esc(initials(p.public_name));
+    const rating=Number(p.rating);
+    const count=Number(p.rating_count||0);
+    const completed=Number(p.completed_services||0);
+    const distance=Number(p.distance_km);
+    const badges=Array.isArray(p.verification_badges)?p.verification_badges:[];
+    return `<article class="providerCard">
+      <div class="providerTop"><div class="avatar">${avatar}</div><div>
+        <div class="providerName">${name}</div>
+        <div class="providerMeta">${Number.isFinite(rating)&&rating>0?'★ '+rating.toFixed(1)+(count?' · '+count:''):''}${Number.isFinite(distance)?` <span class="distance">· ${distance.toFixed(1)} ${esc(tr('kmAway'))}</span>`:''}</div>
+        <div class="providerMeta">${completed>0?completed+' servicios completados':''}</div>
+      </div></div>
+      ${badges.length?`<div class="badges">${badges.map(x=>`<span class="badge">${esc(x)}</span>`).join('')}</div>`:''}
+    </article>`;
+  }).join('');
+}
+async function findNearby(lat,lng){
+  const token=localStorage.getItem(K.token)||'';
+  if(!token){show();return}
+  if(!selectedService)return providerNotice(tr('safeNotice'));
+  const latitude=Number(lat),longitude=Number(lng);
+  if(!Number.isFinite(latitude)||!Number.isFinite(longitude)||latitude<-90||latitude>90||longitude<-180||longitude>180)return providerNotice(tr('providerError'),true);
+  providerNotice(tr('searchingProviders'));
+  try{
+    const r=await post({action:'findNearbyProviders',session_token:token,payload:{
+      canonical_service:selectedService,
+      service_location:{latitude,longitude},
+      limit:20
+    }});
+    if(!r?.ok)throw new Error(String(r?.error||'API_ERROR'));
+    renderProviders(r.data||{});
+    $('locationMeta').textContent='';
+  }catch(e){
+    if(String(e?.message||'').includes('AUTHENTICATION')){localStorage.removeItem(K.token);show();return}
+    providerNotice(tr('providerError'),true);
+  }
+}
+document.querySelectorAll('.cat').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('.cat').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active');selectedService=String(b.dataset.key||'').trim();
+  $('locationBox').classList.remove('hidden');$('manualLocation').classList.add('hidden');
+  providerNotice(tr('where'));
+});
+$('currentLocationBtn').onclick=()=>{
+  if(!navigator.geolocation)return providerNotice(tr('locationDenied'),true);
+  $('locationMeta').textContent=tr('locating');
+  navigator.geolocation.getCurrentPosition(
+    p=>findNearby(p.coords.latitude,p.coords.longitude),
+    ()=>{$('locationMeta').textContent='';providerNotice(tr('locationDenied'),true)},
+    {enableHighAccuracy:true,timeout:12000,maximumAge:60000}
+  );
+};
+$('otherLocationBtn').onclick=()=>{$('manualLocation').classList.toggle('hidden');$('locationMeta').textContent=''};
+$('searchProvidersBtn').onclick=()=>findNearby($('serviceLat').value,$('serviceLng').value);
 $('serviceSearch').oninput=e=>{const q=e.target.value.toLowerCase();document.querySelectorAll('.cat').forEach(b=>b.style.display=b.textContent.toLowerCase().includes(q)?'block':'none')};
 paint();show();if('serviceWorker'in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
 </script></body></html>
